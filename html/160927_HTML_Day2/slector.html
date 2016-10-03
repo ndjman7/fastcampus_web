@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="slector.css">
+
+  <title>Document</title>
+</head>
+<body>
+  <h1>Headline1</h1>
+  <h2>Headline2</h2>
+
+  <p>paragraph</p>
+  <span>span</span>
+
+<!-- Class Selector -->
+<div class="section">
+  <p class="section-title">Lorem ipsum dolor sit amet.</p>
+  <p calss="section-content">Lorem ipsum dolor sit amet.</p>
+</div>
+<div class="section">
+  <p class="section-title">Lorem ipsum dolor sit amet.</p>
+  <p class="section-content">Lorem ipsum dolor sit amet.</p>
+</div>
+
+
+  <h3 id="index-title">Lorem ipsum dolor sit.</h3>
+  <p id="index-description" class="index-title">일반텍스트로 나타내보세요.</p>
+
+
+
+  <!-- section>ul>li{items$}*4+li>ul>li{inner items$}*3 -->
+  <section>
+    <ul>
+      <li>items1</li>
+      <li>items2</li>
+      <li>items3</li>
+      <li>items4</li>
+      <li>
+        <ul>
+          <li>inner items1</li>
+          <li>inner items2</li>
+          <li>inner items3</li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+
+  <a href=""></a>
+  <a href="naver.com"></a>
+  <a href="value abc"></a>
+  <a href="abcdefgh"></a>
+  <a href="abc-sdf"></a>
+  <a href="asdfabcsef"></a>
+
+
+<!-- 가상 클래스 -->
+  <a href="naver.com" class="pseudo">가상 클래스 선택자</a>
+</body>
+</html>

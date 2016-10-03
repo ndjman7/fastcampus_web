@@ -1,0 +1,45 @@
+div {
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+  background-image: url('01.jpg');
+  background-repeat: no-repeat;
+  /* left, right, top, bottom, center*/
+  background-position: center center;
+
+  background-attachment: local ;
+
+  overflow-y: auto;
+
+}
+
+
+div.border {
+  width: 200px;
+  height: 200px;
+  border-width: 3px,6px,9px,12px;
+  border-color: red blue green black;
+  border-style: solid double dotted dashed;
+}
+
+div.box-margin1{
+
+}
+
+div.content-box {
+  width:200px;
+  border: 3px solid red;
+  padding: 5px;
+  box-sizing: content-box ;
+}
+
+div.border-box {
+  width:200px;
+  border: 3px solid red;
+  padding: 5px;
+  box-sizing: border-box ;
+}
+
+ul.list-style-position-inside {
+  list-style-position: inside;
+}

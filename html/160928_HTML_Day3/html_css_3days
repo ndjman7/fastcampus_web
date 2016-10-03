@@ -1,0 +1,19 @@
+## From 요소
+form은 브라우저에서 서버에 전송하려고 만든 것
+form - method 폼에서 데이터를 전송하는 방식을 결정
+
+action form에서 데이터를 전송할 URL
+
+input 요소
+
+size 한 번에 보여주는 갯수
+
+###button 요소
+
+
+
+## tip
+inline 요소를 display : inline-block으로 지정해줘야 width ,height 같은 크기가 사용된다.
+
+##label은 데이터의 정보를 알려주는 것
+그 안에 요소에 for는 다른 요소에 name과 매칭시켜서 이 label이 그 데이터의 정보를 설명해주고 있다는 의미를 뜻한다.

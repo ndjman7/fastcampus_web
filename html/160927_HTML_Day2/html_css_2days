@@ -1,0 +1,49 @@
+### CSS 배경 스타일
+배경 속기법 
+
+##블록 요소와 인라인 요소의 차이
+인라인 요스이 높이는 지정이 불가능합니다
+
+블록요소간의 세로 마진은 서로 겹치게 된다.
+
+가로마진은 서로 겹치지 않는다. 
+
+
+가로, 세로 (width, height)
+
+
+테이블은 레이아웃을 잡을때는 안쓰이고 테이블을 만들때만 쓰인다.
+
+
+thead, tbody, tfoot
+
+border-collapse
+border
+
+## CSS ghkaus vytlqkdqjq
+```css
+div {
+    display: inline-block;
+ }```
+
+
+ ```CSS
+display : none
+```
+none은 아예 안보이게 한다.
+
+hidden은 공간은 남고 나머지를 안보이게 한다.
+
+##Float
+말그대로 띄운다.
+
+##Clear
+
+
+##float 레이아웃
+
+
+##position
+요소의 위치를 지정합니다.
+relative가 존재하는 이유는  absolute 때문이다.
+
