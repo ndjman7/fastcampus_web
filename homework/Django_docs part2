@@ -1,0 +1,40 @@
+##Writing your first Django app, part 2
+#### DB setup
+기본설정으로, SQLite를 사용한다.
+그렇지만 원한다면 바꿀 수 있다.
+만약 바꾼다면 추가적으로 **USER**, **PASSWORD**, **HOST** 세팅이 필요하다.
+<br>
+**INSTALLED_APPS**는 Django의 어플리케이션들의 Django 인스턴스를 활성화시키기 위해 가지고 있다.
+
+* django.contrib.admin - admin 사이트
+* django.contrib.auth - 인증 시스템
+* django.contrib.contenttypes - 내용의 프레임워크
+* django.contrib.sessions - 세션 프레임워크
+* django.contrib.messages - 메세지 프레임워크
+* django.contrib.staticfiles - 스태틱 파일들을 관리하는 프레임워크
+<br>
+application들이 새로운 테이블을 만들어서 사용한다면,
+`$ python manage.py migrate`
+**migrate**는 **INSATALLED_APPS** 세팅과 **mysite/settings.py**에 DB migrations를 app에 넣기 위해 사용한다.
+#### Creating models
+#### Activating models
+* DB schema를 만들어라.
+* Python database-access API로 접근할 수 있는 Question와Choice 오브젝트를 만들어라.
+settings.py의 INSTALLED_APP에 polls를 사용하겠다고 선언하고,
+`$ python manage.py makemigrations polls`
+```
+	Migrations for 'polls':
+		polls/migrations/0001_initial.py:
+			- Create model Choice
+			- Create model Question
+			- Add field question to choice
+```
+**makemigrations**는 Django에게 models를 변경했다고 알려주는 것이다.
+<br>
+세가지만 기억
+ * odels를 변경
+ * python manage.py makemigrations를 이용해서 변화된 migrations를 생성
+ * python manage.py migrate로 데이터베이스에 적용.
+ #### Creating an admin user
+ `$ python manage.py createsuperuser`
+ 
