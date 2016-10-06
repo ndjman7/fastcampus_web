@@ -33,5 +33,14 @@ def vote(request, question_id):
 
 def add_choice(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    question.choice_set.create(choice_text=request.POST['add'],votes=0)
-    return render(request, 'detail.html', {'question':question})
+    try:
+        add_choice=request.POST['add']
+        if add_choice =="":
+            raise KeyError
+    except (KeyError):
+        return render(request, 'detail.html', {
+            'question': question,
+            'error_message': "You didn't input string."
+            })
+    question.choice_set.create(choice_text=add_choice,votes=0)
+    return HttpResponseRedirect(revers('poll:detail', args=(question_id,)))
