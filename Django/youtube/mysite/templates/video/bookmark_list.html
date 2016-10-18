@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bookmark_list</title>
+</head>
+<body>
+  <a href="{% url 'search' %}">Main</a>
+  <h1>Bookmark_list</h1>
+  {% for video in videos %}
+  <p>Thumbnails: <img src="{{ video.thumbnails }}" alt=""></p>
+  <p>Kind: {{ video.kind }}</p>
+  <p>VideoId: {{ video.videoId }}</p>
+  <p>Title: {{ video.title }}</p>
+  <p>Description: {{ video.description}}</p>
+  <p>publishedAt: {{ video.publishedAt }}</p>
+
+  <p>---------------------------------</p>
+  {% endfor %}
+</body>
+</html>

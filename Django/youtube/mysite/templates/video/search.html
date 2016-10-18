@@ -1,0 +1,50 @@
+{% load app_filters %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Youtube Search</title>
+</head>
+<body>
+  <form action="">
+  <h1>Yotube Search Project</h1>
+  <!-- input 요소가 있을 때 버튼이 없어도 사용가능.-->
+    <input type="text" name="keyword">
+    <button type="submit">Search</button>
+  </form>
+  <a href="{% url 'bookmark_list' %}">Bookmark</a>
+  <ul>
+    {% for item in response.items %}
+    <li>
+
+      <p>{{ item.snippet.title }}</p>
+      <p>{{ item.snippet.publishedAt|string_to_date }}</p>
+      <img src="{{ item.snippet.thumbnails.high.url }}" alt="">
+      <form action="{% url 'add_bookmark' %}" method="POST">{% csrf_token %}
+        <input id="id_kind" maxlength="50" name="kind" type="hidden" value="{{ item.id.kind }}">
+        <input id="id_videoId" maxlength="50" name="videoId" type="hidden" value="{{ item.id.videoId }}">
+        <input id="id_title" maxlength="200" name="title" type="hidden" value="{{ item.snippet.title }}">
+        <input id="id_description" maxlength="200" name="description" type="hidden" value="{{ item.snippet.description }}">
+        <input id="id_publishedAt" maxlength="50" name="publishedAt" type="hidden" value="{{ item.snippet.publishedAt|string_to_date }}">
+        <input id="id_thumbnails" maxlength="200" name="thumbnails" type="hidden" value="{{ item.snippet.thumbnails.high.url }}">
+        <input id="id_current" maxlength="200" name="current_url" type="hidden" value="{{ request.path }}?keyword={{keyword}}&  page_token={{page_token}}">
+        <button type="submit">bookmark</button>
+      </form>
+
+    </li>
+    {% endfor %}
+
+    {% if response.prevPageToken %}
+    <a href="{% url 'search' %}?keyword={{ keyword }}&page_token={{ response.prevPageToken }}">이전페이지</a>
+    {% endif %}
+    {% if response.nextPageToken and not prevPageToken %}
+    <a href="{% url 'search' %}?keyword={{ keyword }}">첫 페이지</a>
+    {% endif %}
+    {% if response.nextPageToken %}
+    <a href="{% url 'search' %}?keyword={{ keyword }}&page_token={{ response.nextPageToken }}">다음페이지</a>
+    {% endif %}
+  </ul>
+</body>
+</html>

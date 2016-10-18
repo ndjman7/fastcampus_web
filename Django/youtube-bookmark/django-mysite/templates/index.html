@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Youtube-Bookmark App</title>
+</head>
+<body>
+  <div>
+    <h1><a href="/video">Youtube-Bookmark</a></h1>
+    <a href="{% url 'video:category_edit' %}">New Category</a> 
+  </div>
+  {% block content %}
+  {% endblock %}
+</body>
+</html>

@@ -1,8 +1,10 @@
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
+
 
 class Post(models.Model):
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
     text = models.CharField(max_length=200)
     title = models.TextField()
     create_date = models.DateTimeField(auto_now_add=True)

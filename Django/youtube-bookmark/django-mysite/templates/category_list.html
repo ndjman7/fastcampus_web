@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Menu</h1>
+    {% for category in videocategories %}
+        <h2><a href="{% url 'video:category_video_list' pk=category.pk %}">{{ category.category_name }}</a></h2>
+    {% endfor %}
+    <br>
+{% endblock content %}

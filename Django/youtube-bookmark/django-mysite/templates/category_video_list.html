@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+
+{% block content %}
+  <h2>{{ videocategory.category_name }}</h2>
+  {% for video in videos %}
+    <div>
+      <a href="{%url 'video:video_list' pk=videocategory.id pk2=video.id%}">{{ video.title }}</a>
+    </div>
+{% endfor %}
+{% endblock content %}
