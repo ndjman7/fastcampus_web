@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.conf import settings
+from apis.mail import send_mail
 
 
 class Post(models.Model):
@@ -18,4 +19,19 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post)
+    content = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        super(Comment, self).save(*args, **kwargs)
+        recipient_list = [self.post.author.email]
+        title = '{} 글에 댓글이 달렸습니다'.format(self.post.title)
+        content = '{}에 {}내용이 달렸네요'.format(
+            self.created_date.strftime('%Y.%m.%d %H:%M'),
+            self.content
+        )
+        send_mail(title, content)
 

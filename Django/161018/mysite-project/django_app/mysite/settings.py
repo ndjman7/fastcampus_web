@@ -27,7 +27,17 @@ STATICFILES_DIRS = [
 
 AUTH_USER_MODEL = 'member.MyUser'
 # AUTH_USER_MODEL = 'django.contrib.auth.models.User'
-
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'member.backends.FacebookBackend',
+]
+# Email
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'ndjman7@gmail.com'
+EMAIL_HOST_PASSWORD = 'ndj1050221'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -40,6 +50,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Facebook
+FACEBOOK_APP_ID = '721924057956431'
+FACEBOOK_SECRET_CODE = '58157e4e283b02691b24ad643ce0d986'
 
 # Application definition
 

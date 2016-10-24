@@ -3,6 +3,7 @@
 {% load humanize %}
 
 {% block content %}
+<div class="container">
 	<h5>"{{ keyword }}"로 검색 (총 {{ response.pageInfo.totalResults|intcomma }}개)</h5>
 	<form action="" class="form-inline">
 		<input type="text" class="form-control" name="keyword" placeholder="{{ keyword }}">
@@ -12,20 +13,37 @@
 	<ul>
 		{% for item in response.items %}
 		<li>
-			<img src="{{ item.snippet.thumbnails.medium.url }}" alt="">
-			<p>{{ item.snippet.title }}</p>
-			<p>{{ item.snippet.description }}</p>
-			<p>{{ item.snippet.publishedAt|string_to_date|date:"Y.m.d h:i" }}</p>
-			<form action="{% url 'video:bookmark_add' %}" method="POST">{% csrf_token %}
-				<input type="hidden" name="title" value="{{ item.snippet.title }}" >
-				<input type="hidden" name="description" value="{{ item.snippet.description }}" >
-				<input type="hidden" name="published_date" value="{{ item.snippet.publishedAt|string_to_date|date:'Y-m-d h:i' }}"  >
-				<input type="hidden" name="kind" value="{{ item.kind }}" >
-				<input type="hidden" name="thumbnails" value="{{ item.snippet.thumbnails.medium.url }}" >
-				<input type="hidden" name="videoId" value="{{ item.id }}" >
-				<input type="hidden" name="path" value="{{ request.get_full_path }}" >
-				<button type="submit" class="btn btn-default">bookmark</button>
-			</form>
+			<div class="row">
+        <div class="col-md-4">
+			<a href=""><img src="{{ item.snippet.thumbnails.medium.url }}" alt=""></a>
+        </div>
+        <div class="col-md-8">
+					<p>{{ item.snippet.title }}</p>
+					<p>{{ item.snippet.description|truncatewords:30 }}</p>
+					<p>{{ item.snippet.publishedat|string_to_date|date:"y.m.d h:i" }}</p>
+					<div class="row">
+						<div class="col-md-1 btn btn-xs btn-primary glyphicon glyphicon-eye-open">{{ item.statistics.viewCount }}</div>
+						<div class="col-md-1 btn btn-xs btn-primary glyphicon glyphicon-thumbs-up">{{ item.statistics.likeCount }}</div>
+						<div class="col-md-1 btn btn-xs btn-primary glyphicon glyphicon-thumbs-down">{{ item.statistics.dislikeCount }}</div>
+						<div class="col-md-1 btn btn-xs btn-primary glyphicon glyphicon-pencil">{{ item.statistics.commentCount }}</div>
+						<form action="{% url 'video:bookmark_add' %}" method="post">{% csrf_token %}
+							<input type="hidden" name="title" value="{{ item.snippet.title }}" >
+							<input type="hidden" name="description" value="{{ item.snippet.description }}" >
+							<input type="hidden" name="published_date" value="{{ item.snippet.publishedAt|string_to_date|date:'Y-m-d h:i' }}"  >
+							<input type="hidden" name="kind" value="{{ item.kind }}" >
+							<input type="hidden" name="thumbnails" value="{{ item.snippet.thumbnails.medium.url }}" >
+							<input type="hidden" name="videoid" value="{{ item.id }}" >
+							<input type="hidden" name="path" value="{{ request.get_full_path }}" >
+						{% if item.is_exist %}
+							<div type="submit" class="btn btn-default col-md-2 btn btn-danger">Exist Bookmark</button>
+						{% else %}
+							<button type="submit" class="btn btn-default col-md-2 btn btn-success">Add Bookmark</button>
+						{% endif %}
+						</form>
+					</div>
+
+				</div>
+			</div>
 		</li>
 		{% endfor %}
 		<!--
@@ -51,4 +69,5 @@
 		<a href="{% url 'video:search' %}?keyword={{ keyword }}&page_token={{ response.nextPageToken }}" class="btn btn-default">다음페이지</a>
 		{% endif %}
 	</ul>
+</div>
 {% endblock content %}

@@ -15,7 +15,7 @@ def bookmark_add(request):
             path = request.POST.get('path')
             Video.objects.create(
                 kind=request.POST['kind'],
-                youtube_id=request.POST['videoId'],
+                youtube_id=request.POST['videoid'],
                 title=request.POST['title'],
                 description=request.POST['description'],
                 published_date=request.POST['published_date'],
@@ -31,7 +31,6 @@ def bookmark_add(request):
             return redirect('video:bookmark_list')
 
 
-
 def bookmark_list(request):
     videos = Video.objects.all()
     return render(request, 'video/bookmark_list.html', {'videos': videos})
@@ -39,4 +38,4 @@ def bookmark_list(request):
 
 def bookmark_detail(request, pk):
     video = get_object_or_404(Video, pk=pk)
-    return render(request, 'video/bookmark_detail.html', {'video':video})
+    return render(request, 'video/bookmark_detail.html', {'video': video})

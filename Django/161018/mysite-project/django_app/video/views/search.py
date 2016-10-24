@@ -27,7 +27,6 @@ def search(request):
     # request.GET의 parameter에서 keyword, page_token값을 가져옴
     keyword = request.GET.get('keyword')
     page_token = request.GET.get('page_token')
-
     # 만약 keyword값이 존재할 경우 (request.GET의 keyword키로 값이 넘어올 경우)
     # context dict에 keyword, response에 값 할당해줌
     if keyword:

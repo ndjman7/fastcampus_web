@@ -2,6 +2,7 @@ from django.shortcuts import render
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from oauth2client.tools import argparser
+from video.models import Video
 
 
 DEVELOPER_KEY = "AIzaSyDiarbwPOxSkXmNPfdv8UtHcZM6KySpk34"
@@ -32,6 +33,8 @@ def youtube_search(keyword, page_token, max_results=10):
         type='video'
     ).execute()
 
+    videos = Video.objects.all()
+
     video_id_list = []
     for item in search_response['items']:
         video_id_list.append(item['id']['videoId'])
@@ -41,6 +44,14 @@ def youtube_search(keyword, page_token, max_results=10):
         part="id,snippet,statistics,contentDetails",
         id=str_id,
     ).execute()
+
+    exist_list = Video.objects.filter(youtube_id__in=video_id_list)
+    exist_id_list = [video.youtube_id for video in exist_list]
+    for item in search_response2['items']:
+        cur_video_id = item['id']
+        if cur_video_id in exist_id_list:
+            item['is_exist'] = True
+
     if search_response.get('prevPageToken'):
         search_response2['prevPageToken'] = search_response['prevPageToken']
     if search_response.get('nextPageToken'):

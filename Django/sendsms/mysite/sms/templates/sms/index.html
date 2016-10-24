@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>메세지 보내기</title>
+</head>
+<body>
+<form action="" method="post">{% csrf_token %}
+    <label for="to">번호</label>
+    <input type="text" name="to">
+    <label for="text">내용</label>
+    <input type="text" name="text">
+    <button type="submit">보내기</button>
+</form>
+</body>
+</html>

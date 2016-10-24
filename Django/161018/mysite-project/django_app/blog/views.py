@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.db.models import Q
-from .models import Post
+from .models import Post, Comment
 from django.contrib.auth.models import User
 
 # 같은 의미
@@ -35,9 +35,13 @@ def post_detail(request, pk):
 
     # Post객체가 존재하지 않을 경우에는 404Error를 리턴해준다
     post = get_object_or_404(Post, pk=pk)
+
+    comments = post.comment_set.order_by('-created_date')
+
     print('post_detail, post:%s' % post)
     context = {
         'post': post,
+        'comments': comments,
     }
     print('post_detail, context:%s' % context)
     return render(request, 'blog/post_detail.html', context)
@@ -99,3 +103,14 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
 
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+def comment_add(request, post_pk):
+    if request.method == 'POST':
+        post = Post.objects.get(pk=post_pk)
+        comment = Comment.objects.create(
+            post=post,
+            content=request.POST['content']
+        )
+
+        return redirect('blog:post_detail', pk=post.pk)
