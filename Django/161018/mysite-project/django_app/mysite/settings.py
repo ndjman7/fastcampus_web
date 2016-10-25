@@ -34,8 +34,8 @@ AUTHENTICATION_BACKENDS = [
 # Email
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'ndjman7@gmail.com'
-EMAIL_HOST_PASSWORD = 'ndj1050221'
+EMAIL_HOST_USER = 'fastcampus.2016@gmail.com'
+EMAIL_HOST_PASSWORD = 'fastcampus'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
