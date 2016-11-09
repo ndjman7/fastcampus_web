@@ -1,0 +1,9 @@
+{% extends 'common/base.html' %}
+{% block content %}
+<form action="{% url 'movie:detail' %}" method="GET">
+  {% csrf_token %}
+  <label for="movie">영화 검색</label>
+  <input type="text" name="movie" id="movie">
+  <button type="submit" >Search</button>
+</form>
+{% endblock %}
